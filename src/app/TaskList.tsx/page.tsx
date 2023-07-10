@@ -52,7 +52,7 @@ const TaskList: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => (
+          {tasks?.map((task) => (
             <tr key={task.id}>
               {editTaskId === task.id ? (
                 <>

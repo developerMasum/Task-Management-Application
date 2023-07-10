@@ -17,12 +17,16 @@ export const useMST = (): [MSTState, (task: Task) => void, (updatedTask: Task) =
   };
 
   const [state, setState] = React.useState<MSTState>(() => {
-    const storedState = localStorage.getItem('mst_state');
-    return storedState ? JSON.parse(storedState) : initialState;
+    if (typeof window !== 'undefined') {
+      const storedState = localStorage.getItem('tasks_management')
+    return storedState ? JSON.parse(storedState) : initialState;}
+    else{
+      console.log('okay');
+    }
   });
 
   const setLocalStorageState = (newState: MSTState) => {
-    localStorage.setItem('mst_state', JSON.stringify(newState));
+    localStorage.setItem('tasks_management', JSON.stringify(newState));
   };
 
   const addTask = (task: Task) => {
@@ -64,10 +68,15 @@ export const useMST = (): [MSTState, (task: Task) => void, (updatedTask: Task) =
   };
   
   const getTasks = () => {
-    const storedState = localStorage.getItem('mst_state');
-    const parsedState: MSTState = storedState ? JSON.parse(storedState) : initialState;
-    return parsedState.tasks;
+    if (typeof window !== 'undefined' && localStorage.getItem('tasks_management')) {
+      const storedState = localStorage.getItem('tasks_management');
+      const parsedState: MSTState = JSON.parse(storedState!);
+      return parsedState.tasks;
+    } else {
+      return initialState.tasks;
+    }
   };
+  
 
   return [state, addTask, editTask, deleteTask, getTasks];
 };
