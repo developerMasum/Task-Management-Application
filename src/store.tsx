@@ -18,12 +18,14 @@ export const useMST = (): [MSTState, (task: Task) => void, (updatedTask: Task) =
 
   const [state, setState] = React.useState<MSTState>(() => {
     if (typeof window !== 'undefined') {
-      const storedState = localStorage.getItem('tasks_management')
-    return storedState ? JSON.parse(storedState) : initialState;}
-    else{
-      console.log('okay');
+      const storedState = localStorage.getItem('tasks_management');
+      return storedState ? JSON.parse(storedState) : initialState;
+    } else {
+      console.log('localStorage is not available');
+      return initialState; // Provide a default initial state
     }
   });
+  
 
   const setLocalStorageState = (newState: MSTState) => {
     localStorage.setItem('tasks_management', JSON.stringify(newState));
