@@ -25,24 +25,24 @@ const AddTaskPage: React.FC = () => {
     if (taskTitle.trim() === '') {
       setTitleError('Title is required');
       hasError = true;
-    } else if (taskTitle.length > 30) {
-      setTitleError('Title should be less than or equal to 30 characters');
+    } else if (taskTitle.length > 50) {
+      setTitleError('Title should be less than or equal to 50 characters');
       hasError = true;
     } 
 
     if (taskDescription.trim() === '') {
       setDescriptionError('Description is required');
       hasError = true;
-    } else if (taskDescription.length > 50) {
-      setDescriptionError('Description should be less than or equal to 50 characters');
+    } else if (taskDescription.length > 250) {
+      setDescriptionError('Description should be less than or equal to 250 characters');
       hasError = true;
     }
 
     if (taskStatus.trim() === '') {
       setStatusError('Status is required');
       hasError = true;
-    } else if (taskStatus.length > 10) {
-      setStatusError('Status should be less than or equal to 10 characters');
+    } else if (taskStatus.length > 30) {
+      setStatusError('Status should be less than or equal to 30 characters');
       hasError = true;
     }
 
@@ -61,7 +61,7 @@ const AddTaskPage: React.FC = () => {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Your work has been saved',
+      title: 'task added successfully ',
       showConfirmButton: false,
       timer: 1000
     }).then(() => {
@@ -73,7 +73,7 @@ const AddTaskPage: React.FC = () => {
   };
 
   return (
-    <div className="w-1/2 mx-auto">
+    <div className="w-full p-3  md:w-1/2 lg-w-1/2 mx-auto mb-12   border border-gray-200 ">
       <h1 className="text-2xl font-bold mb-4 text-center pt-4">Add Task</h1>
       <form className="text-black">
         <div className="mb-4">
@@ -114,13 +114,15 @@ const AddTaskPage: React.FC = () => {
           />
           {statusError && <p className="text-red-500">{statusError}</p>}
         </div>
-        <button
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      <div className='flex items-center'>
+      <button
+          className="bg-blue-500 text-white py-3 w-1/2 mx-auto px-4 rounded hover:bg-blue-800"
           type="button"
           onClick={handleAddTask}
         >
           Add Task
         </button>
+      </div>
       </form>
       
     </div>
