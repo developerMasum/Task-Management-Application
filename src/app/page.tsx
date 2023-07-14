@@ -11,7 +11,7 @@ const Home: React.FC = () => {
         <div>
           <TaskList />
         </div>
-        <div className="mt-12">
+        <div className="mt-20">
           <AddTaskPage />
         </div>
       </div>
