@@ -15,7 +15,6 @@ const AddTaskPage: React.FC = () => {
   const [statusError, setStatusError] = useState('');
 
   const handleAddTask = () => {
-    // Reset previous errors
     setTitleError('');
     setDescriptionError('');
     setStatusError('');
@@ -65,7 +64,7 @@ const AddTaskPage: React.FC = () => {
       showConfirmButton: false,
       timer: 1000
     }).then(() => {
-      // Reload the page after Swal is fully shown
+    
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -73,59 +72,64 @@ const AddTaskPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full p-3  md:w-1/2 lg-w-1/2 mx-auto mb-12   border border-gray-200 ">
-      <h1 className="text-2xl font-bold mb-4 text-center pt-4">Add Task</h1>
-      <form className="text-black">
-        <div className="mb-4">
-          <label className="block text-gray-300">Title:</label>
-          <input
-            className="border border-gray-300 rounded-md p-2 w-full"
-            type="text"
-            value={taskTitle}
-            onChange={(e) => {
-              if (!/\d/.test(e.target.value)) {
-                setTaskTitle(e.target.value);
-              } else {
-                setTitleError('Title should not contain numbers');
-              }
-            }}
-            placeholder="Enter title"
-          />
-          {titleError && <p className="text-red-500">{titleError}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-300">Description:</label>
-          <textarea
-            className="border border-gray-600 rounded-md p-2 w-full"
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-            placeholder="Enter description"
-          ></textarea>
-          {descriptionError && <p className="text-red-500">{descriptionError}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-300">Status:</label>
-          <input
-            className="border border-gray-300 rounded-md p-2 w-full"
-            type="text"
-            value={taskStatus}
-            onChange={(e) => setTaskStatus(e.target.value)}
-            placeholder="Enter status"
-          />
-          {statusError && <p className="text-red-500">{statusError}</p>}
-        </div>
-      <div className='flex items-center'>
-      <button
-          className="bg-blue-500 text-white py-3 w-1/2 mx-auto px-4 rounded hover:bg-blue-800"
+    <div className="w-full p-3 md:w-full lg:w-full mx-auto mb-12 border border-gray-200">
+    <h1 className="text-2xl font-bold mb-4 text-center pt-4">Add Task</h1>
+    <form className="text-black">
+      <div className="mb-4">
+        <label className="block text-gray-300">Title:</label>
+        <input
+          className="border border-gray-300 rounded-md p-2 w-full"
+          type="text"
+          value={taskTitle}
+          onChange={(e) => {
+            if (!/\d/.test(e.target.value)) {
+              setTaskTitle(e.target.value);
+              setTitleError('');
+            } else {
+              setTitleError('Title should not contain numbers');
+            }
+          }}
+          placeholder="Enter title"
+        />
+        {titleError && <p className="text-red-500">{titleError}</p>}
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-300">Description:</label>
+        <textarea
+          className="border border-gray-600 rounded-md p-2 w-full"
+          value={taskDescription}
+          onChange={(e) => setTaskDescription(e.target.value)}
+          placeholder="Enter description"
+        ></textarea>
+        {descriptionError && <p className="text-red-500">{descriptionError}</p>}
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-300">Status:</label>
+        <select
+          className="border border-gray-300 rounded-md p-2 w-full"
+          value={taskStatus}
+          onChange={(e) => setTaskStatus(e.target.value)}
+          placeholder="Select status"
+        >
+          <option value="">Select status</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        {statusError && <p className="text-red-500">{statusError}</p>}
+      </div>
+      <div className="flex items-center">
+        <button
+          className="bg-blue-500 text-white py-3 w-full mx-auto px-4 rounded hover:bg-blue-800"
           type="button"
           onClick={handleAddTask}
         >
           Add Task
         </button>
       </div>
-      </form>
-      
-    </div>
+    </form>
+  </div>
+  
   );
 };
 

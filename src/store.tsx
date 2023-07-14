@@ -21,8 +21,7 @@ export const useMST = (): [MSTState, (task: Task) => void, (updatedTask: Task) =
       const storedState = localStorage.getItem('tasks_management');
       return storedState ? JSON.parse(storedState) : initialState;
     } else {
-      console.log('localStorage is not available');
-      return initialState; // Provide a default initial state
+      return initialState; 
     }
   });
   
